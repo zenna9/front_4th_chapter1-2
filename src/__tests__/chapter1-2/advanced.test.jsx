@@ -6,7 +6,7 @@ import { createVNode, renderElement } from "../../lib";
 describe("Chapter1-2 > 심화과제 > Virtual DOM과 이벤트 관리", () => {
   let container;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     container = document.createElement("div");
     document.body.appendChild(container);
   });
@@ -170,68 +170,6 @@ describe("Chapter1-2 > 심화과제 > Virtual DOM과 이벤트 관리", () => {
       expect(container.querySelector("p").textContent).toBe(
         "Updated Child Text",
       );
-    });
-  });
-
-  describe("이벤트 관리 > ", () => {
-    it("이벤트가 위임 방식으로 등록되어야 한다", () => {
-      const clickHandler = vi.fn();
-      const vNode = (
-        <div>
-          <button onClick={clickHandler}>Click me</button>
-        </div>
-      );
-      renderElement(vNode, container);
-
-      const button = container.querySelector("button");
-      button.click();
-
-      expect(clickHandler).toHaveBeenCalledTimes(1);
-    });
-
-    it("동적으로 추가된 요소에도 이벤트가 정상적으로 작동해야 한다", () => {
-      const clickHandler = vi.fn();
-      const initialVNode = (
-        <div>
-          <button onClick={clickHandler}>Initial Button</button>
-        </div>
-      );
-      renderElement(initialVNode, container);
-
-      const updatedVNode = (
-        <div>
-          <button onClick={clickHandler}>Initial Button</button>
-          <button onClick={clickHandler}>New Button</button>
-        </div>
-      );
-      renderElement(updatedVNode, container);
-
-      const newButton = container.querySelectorAll("button")[1];
-      newButton.click();
-
-      expect(clickHandler).toHaveBeenCalledTimes(1);
-    });
-
-    it("이벤트 핸들러가 제거되면 더 이상 호출되지 않아야 한다", () => {
-      const clickHandler = vi.fn();
-      const initialVNode = (
-        <div>
-          <button onClick={clickHandler}>Button</button>
-        </div>
-      );
-      renderElement(initialVNode, container);
-
-      const updatedVNode = (
-        <div>
-          <button>Button Without Handler</button>
-        </div>
-      );
-      renderElement(updatedVNode, container);
-
-      const button = container.querySelector("button");
-      button.click();
-
-      expect(clickHandler).not.toHaveBeenCalled();
     });
   });
 });

@@ -4,4 +4,6 @@ export * from "./createRouter";
 export * from "./createHashRouter";
 export * from "./createVNode";
 export * from "./createElement";
+export * from "./normalizeVNode";
 export * from "./renderElement";
+export * from "./eventManager";
