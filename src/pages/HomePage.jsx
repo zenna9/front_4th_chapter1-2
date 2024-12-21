@@ -8,7 +8,7 @@ import { globalStore } from "../stores";
  * 심화과제
  * - 로그인한 사용자는 게시물을 추가할 수 있다.
  * - 로그인한 사용자는 게시물에 좋아요를 누를 수 있다.
- * - 로그인하지 않은 사용자가 게시물에 좋아요를 누를 경우, 경고 메세지가 표시된다.
+ * - 로그인하지 않은 사용자가 게시물에 좋아요를 누를 경우, "로그인 후 이용해주세요"를 alert로 띄운다.
  */
 export const HomePage = () => {
   const { posts } = globalStore.getState();
@@ -22,9 +22,11 @@ export const HomePage = () => {
         <main className="p-4">
           <PostForm />
           <div id="posts-container" className="space-y-4">
-            {posts.map((props) => (
-              <Post {...props} />
-            ))}
+            {[...posts]
+              .sort((a, b) => b.time - a.time)
+              .map((props) => {
+                return <Post {...props} activationLike={false} />;
+              })}
           </div>
         </main>
 
