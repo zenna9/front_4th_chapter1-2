@@ -115,7 +115,7 @@ describe("Chapter1-2 > 기본과제 > 가상돔 만들기 > ", () => {
               {
                 type: "li",
                 props: { key: 1 },
-                children: ["Item ", ": ", 1],
+                children: ["Item ", 0, ": ", 1],
               },
               {
                 type: "li",
